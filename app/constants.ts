@@ -1,5 +1,13 @@
-import { type CanvasDimensions } from './types';
+import { type CanvasDimensions, type ImageDetails } from "./types";
 export const CANVAS_DIMENSIONS: CanvasDimensions = {
-    width: 500,
-    height: 500,
-}
+  width: 500,
+  height: 500,
+};
+
+export const defaultImageDatails: ImageDetails = {
+  width: 0,
+  height: 0,
+  x: 0,
+  y: 0,
+  data: "",
+};

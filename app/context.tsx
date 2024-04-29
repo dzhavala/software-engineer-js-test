@@ -7,6 +7,7 @@ import React, {
   SetStateAction,
 } from "react";
 import { type ImageDetails } from "./types";
+import { defaultImageDatails } from "./constants";
 // Define types for context value
 type PhotoEditorContextType = {
   imageDetails: ImageDetails;
@@ -31,13 +32,6 @@ export const PhotoEditorProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const defaultImageDatails: ImageDetails = {
-    width: 0,
-    height: 0,
-    x: 0,
-    y: 0,
-    data: "",
-  };
   const [imageDetails, setImageDetails] =
     useState<ImageDetails>(defaultImageDatails);
 
