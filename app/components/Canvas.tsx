@@ -4,7 +4,7 @@ import { type ImageDetails } from "../types";
 
 interface CanvasProps {
   imageElement: HTMLImageElement | null | undefined;
-  image: ImageDetails | null | undefined;
+  imageDetails: ImageDetails | null | undefined;
   canvasWidth: number;
   canvasHeight: number;
   onMouseDown: (event: React.MouseEvent<HTMLCanvasElement>) => void;
@@ -15,7 +15,7 @@ interface CanvasProps {
 
 const Canvas = ({
   imageElement,
-  image,
+  imageDetails,
   canvasWidth,
   canvasHeight,
   ...rest
@@ -24,9 +24,9 @@ const Canvas = ({
   if (canvasRef.current) {
     const ctx = canvasRef.current.getContext("2d");
 
-    if (ctx && image && imageElement) {
+    if (ctx && imageDetails && imageElement) {
       ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-      const { x, y, width, height } = image;
+      const { x, y, width, height } = imageDetails;
       ctx.drawImage(imageElement, x, y, width, height);
     }
   }

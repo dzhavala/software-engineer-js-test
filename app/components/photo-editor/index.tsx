@@ -1,13 +1,13 @@
-import React, { useState, useEffect, MouseEvent } from "react";
+import React, { useState, useEffect, MouseEvent, useMemo } from "react";
 import { CANVAS_DIMENSIONS } from "../../constants";
 import { type ImageDetails } from "../../types";
 import Canvas from "../Canvas";
 import Toolbar from "../Toolbar";
 import uploadImage from "../../utils/fileReader";
 import imageCreator from "../../utils/imageCreator";
+import imageDetailsCreator from "../../utils/imageDetailsCreator";
 
 const PhotoEditor: React.FC = () => {
-  const [image, setImage] = useState<ImageDetails | null>(null);
   const [imageElement, setImageElement] = useState<HTMLImageElement | null>(
     null
   );
@@ -23,6 +23,11 @@ const PhotoEditor: React.FC = () => {
   const [dragging, setDragging] = useState<boolean>(false);
   const [prevX, setPrevX] = useState<number>(0);
   const [prevY, setPrevY] = useState<number>(0);
+
+  const imageDetails: ImageDetails = useMemo(
+    () => imageDetailsCreator(imageElement, offsetX, offsetY),
+    [imageElement, offsetX, offsetY]
+  );
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -62,47 +67,16 @@ const PhotoEditor: React.FC = () => {
   }, [imageElement]);
 
   useEffect(() => {
-    if (imageElement) {
-      renderImageOnCanvas();
-    }
-  }, [imageElement, CANVAS_DIMENSIONS, offsetX, offsetY]);
-
-  const renderImageOnCanvas = () => {
-    if (!imageElement) {
-      return;
-    }
-
-    const aspectRatio = imageElement.width / imageElement.height;
-    let width, height;
-    if (aspectRatio < 1) {
-      width = CANVAS_DIMENSIONS.width;
-      height = CANVAS_DIMENSIONS.width / aspectRatio;
-    } else {
-      width = CANVAS_DIMENSIONS.height * aspectRatio;
-      height = CANVAS_DIMENSIONS.height;
-    }
-    const x = (CANVAS_DIMENSIONS.width - width) / 2 + offsetX;
-    const y = (CANVAS_DIMENSIONS.height - height) / 2 + offsetY;
-
     // Ensure image covers the canvas
-    const maxOffsetX = (width - CANVAS_DIMENSIONS.width) / 2;
-    const maxOffsetY = (height - CANVAS_DIMENSIONS.height) / 2;
-    setMaxOffsetX(maxOffsetX);
-    setMinOffsetX(-maxOffsetX);
-    setMaxOffsetY(maxOffsetY);
-    setMinOffsetY(-maxOffsetY);
-
-    setImage({
-      data: image?.data,
-      x,
-      y,
-      width,
-      height,
-    });
-
-    setDisableXOffset(width <= CANVAS_DIMENSIONS.width);
-    setDisableYOffset(height <= CANVAS_DIMENSIONS.height);
-  };
+    const maxOffsetXVal = (imageDetails.width - CANVAS_DIMENSIONS.width) / 2;
+    const maxOffsetYVal = (imageDetails.height - CANVAS_DIMENSIONS.height) / 2;
+    setMaxOffsetX(maxOffsetXVal);
+    setMinOffsetX(-maxOffsetXVal);
+    setMaxOffsetY(maxOffsetYVal);
+    setMinOffsetY(-maxOffsetYVal);
+    setDisableXOffset(imageDetails.width <= CANVAS_DIMENSIONS.width);
+    setDisableYOffset(imageDetails.height <= CANVAS_DIMENSIONS.height);
+  }, [imageDetails.data]);
 
   const handleOffsetXChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOffsetX(parseInt(e.target.value));
@@ -160,7 +134,7 @@ const PhotoEditor: React.FC = () => {
       <Canvas
         canvasWidth={CANVAS_DIMENSIONS.width}
         canvasHeight={CANVAS_DIMENSIONS.height}
-        image={image}
+        imageDetails={imageDetails}
         imageElement={imageElement}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
