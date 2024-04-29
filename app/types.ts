@@ -4,7 +4,7 @@ export type CanvasDimensions = {
 }
 
 export type ImageDetails = {
-    data: string,
+    data: string | null | undefined,
     x: number;
     y: number;
     width: number;
