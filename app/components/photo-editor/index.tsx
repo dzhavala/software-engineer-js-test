@@ -1,18 +1,11 @@
-import React, { useState, useEffect, MouseEvent, useMemo } from "react";
+import React, { useState, useEffect, MouseEvent } from "react";
 import { CANVAS_DIMENSIONS } from "../../constants";
-import { type ImageDetails } from "../../types";
 import Canvas from "../Canvas";
 import Toolbar from "../Toolbar";
-import uploadImage from "../../utils/fileReader";
-import imageCreator from "../../utils/imageCreator";
 import imageDetailsCreator from "../../utils/imageDetailsCreator";
 import { usePhotoEditor } from "../../context";
 
 const PhotoEditor: React.FC = () => {
-  const [imageElement, setImageElement] = useState<HTMLImageElement | null>(
-    null
-  );
-
   const [offsetX, setOffsetX] = useState<number>(0);
   const [offsetY, setOffsetY] = useState<number>(0);
   const [disableXOffset, setDisableXOffset] = useState<boolean>(true);
@@ -25,36 +18,11 @@ const PhotoEditor: React.FC = () => {
   const [prevX, setPrevX] = useState<number>(0);
   const [prevY, setPrevY] = useState<number>(0);
 
-  const { imageDetails, setImageDetails } = usePhotoEditor();
+  const { imageDetails, setImageDetails, imageElement } = usePhotoEditor();
 
   useEffect(() => {
     setImageDetails(imageDetailsCreator(imageElement, offsetX, offsetY));
   }, [imageElement, offsetX, offsetY]);
-
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-
-    if (!file) {
-      alert("Please upload a valid image file.");
-      return;
-    }
-
-    let imageDataUrl = "";
-    let imageElement = null;
-    try {
-      imageDataUrl = await uploadImage(file);
-    } catch (error) {
-      alert(`Error uploading image: , ${(error as Error).message}`);
-    }
-
-    try {
-      imageElement = await imageCreator(imageDataUrl);
-    } catch (error) {
-      alert(`Error generating img element: , ${(error as Error).message}`);
-    }
-
-    setImageElement(imageElement);
-  };
 
   useEffect(() => {
     if (!imageElement) {
@@ -130,7 +98,6 @@ const PhotoEditor: React.FC = () => {
         offsetY={offsetY}
         handleOffsetYChange={handleOffsetYChange}
         disableYOffset={disableYOffset}
-        handleImageUpload={handleImageUpload}
       />
 
       <Canvas

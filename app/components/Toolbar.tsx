@@ -1,4 +1,5 @@
-import React, { useState, useEffect, MouseEvent } from "react";
+import React from "react";
+import FileUploadButton from "./FileUploadButton";
 
 type ToolBapProps = {
   minOffsetX: number;
@@ -11,7 +12,6 @@ type ToolBapProps = {
   offsetY: number;
   handleOffsetYChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   disableYOffset: boolean;
-  handleImageUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const Toolbar = ({
@@ -25,11 +25,10 @@ const Toolbar = ({
   offsetY,
   handleOffsetYChange,
   disableYOffset,
-  handleImageUpload,
 }: ToolBapProps) => {
   return (
     <>
-      <input type="file" accept="image/*" onChange={handleImageUpload} />
+      <FileUploadButton />
       <div>
         <label htmlFor="offsetX">Horizontal Offset:</label>
         <input

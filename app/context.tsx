@@ -12,6 +12,8 @@ import { defaultImageDatails } from "./constants";
 type PhotoEditorContextType = {
   imageDetails: ImageDetails;
   setImageDetails: Dispatch<SetStateAction<ImageDetails>>;
+  imageElement: HTMLImageElement | null;
+  setImageElement: Dispatch<SetStateAction<HTMLImageElement | null>>;
 };
 
 const PhotoEditorContext = createContext<PhotoEditorContextType | undefined>(
@@ -35,12 +37,18 @@ export const PhotoEditorProvider = ({
   const [imageDetails, setImageDetails] =
     useState<ImageDetails>(defaultImageDatails);
 
+  const [imageElement, setImageElement] = useState<HTMLImageElement | null>(
+    null
+  );
+
   const contextValue = useMemo(
     () => ({
       imageDetails,
       setImageDetails,
+      imageElement,
+      setImageElement,
     }),
-    [imageDetails, setImageDetails]
+    [imageDetails, setImageDetails, imageElement, setImageElement]
   );
 
   return (
