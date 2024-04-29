@@ -6,6 +6,7 @@ import Toolbar from "../Toolbar";
 import uploadImage from "../../utils/fileReader";
 import imageCreator from "../../utils/imageCreator";
 import imageDetailsCreator from "../../utils/imageDetailsCreator";
+import { usePhotoEditor } from "../../context";
 
 const PhotoEditor: React.FC = () => {
   const [imageElement, setImageElement] = useState<HTMLImageElement | null>(
@@ -24,10 +25,11 @@ const PhotoEditor: React.FC = () => {
   const [prevX, setPrevX] = useState<number>(0);
   const [prevY, setPrevY] = useState<number>(0);
 
-  const imageDetails: ImageDetails = useMemo(
-    () => imageDetailsCreator(imageElement, offsetX, offsetY),
-    [imageElement, offsetX, offsetY]
-  );
+  const { imageDetails, setImageDetails } = usePhotoEditor();
+
+  useEffect(() => {
+    setImageDetails(imageDetailsCreator(imageElement, offsetX, offsetY));
+  }, [imageElement, offsetX, offsetY]);
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -134,7 +136,6 @@ const PhotoEditor: React.FC = () => {
       <Canvas
         canvasWidth={CANVAS_DIMENSIONS.width}
         canvasHeight={CANVAS_DIMENSIONS.height}
-        imageDetails={imageDetails}
         imageElement={imageElement}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
