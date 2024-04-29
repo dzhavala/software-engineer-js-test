@@ -3,6 +3,8 @@ import { CANVAS_DIMENSIONS } from "../../constants";
 import { type ImageDetails } from "../../types";
 import Canvas from "../Canvas";
 import Toolbar from "../Toolbar";
+import uploadImage from "../../utils/fileReader";
+import imageCreator from "../../utils/imageCreator";
 
 const PhotoEditor: React.FC = () => {
   const [image, setImage] = useState<ImageDetails | null>(null);
@@ -22,80 +24,84 @@ const PhotoEditor: React.FC = () => {
   const [prevX, setPrevX] = useState<number>(0);
   const [prevY, setPrevY] = useState<number>(0);
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file && file.type.startsWith("image/")) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setImage({
-          data: reader.result as string,
-          x: 0,
-          y: 0,
-          width: 0,
-          height: 0,
-        });
 
-        setOffsetX(0);
-        setOffsetY(0);
-        setDisableXOffset(false);
-        setDisableYOffset(false);
-      };
-      reader.readAsDataURL(file);
-    } else {
+    if (!file) {
       alert("Please upload a valid image file.");
+      return;
     }
+
+    let imageDataUrl = "";
+    let imageElement = null;
+    try {
+      imageDataUrl = await uploadImage(file);
+    } catch (error) {
+      alert(`Error uploading image: , ${(error as Error).message}`);
+    }
+
+    try {
+      imageElement = await imageCreator(imageDataUrl);
+    } catch (error) {
+      alert(`Error generating img element: , ${(error as Error).message}`);
+    }
+
+    setImageElement(imageElement);
   };
 
   useEffect(() => {
-    if (!image) {
+    if (!imageElement) {
       setDisableXOffset(true);
       setDisableYOffset(true);
+    } else {
+      setOffsetX(0);
+      setOffsetY(0);
+      setDisableXOffset(false);
+      setDisableYOffset(false);
     }
-  }, [image?.data]);
+  }, [imageElement]);
 
   useEffect(() => {
-    if (image) {
+    if (imageElement) {
       renderImageOnCanvas();
     }
-  }, [image?.data, CANVAS_DIMENSIONS, offsetX, offsetY]);
+  }, [imageElement, CANVAS_DIMENSIONS, offsetX, offsetY]);
 
   const renderImageOnCanvas = () => {
-    const img = new Image();
-    img.onload = () => {
-      const aspectRatio = img.width / img.height;
-      let width, height;
-      if (aspectRatio < 1) {
-        width = CANVAS_DIMENSIONS.width;
-        height = CANVAS_DIMENSIONS.width / aspectRatio;
-      } else {
-        width = CANVAS_DIMENSIONS.height * aspectRatio;
-        height = CANVAS_DIMENSIONS.height;
-      }
-      const x = (CANVAS_DIMENSIONS.width - width) / 2 + offsetX;
-      const y = (CANVAS_DIMENSIONS.height - height) / 2 + offsetY;
+    if (!imageElement) {
+      return;
+    }
 
-      // Ensure image covers the canvas
-      const maxOffsetX = (width - CANVAS_DIMENSIONS.width) / 2;
-      const maxOffsetY = (height - CANVAS_DIMENSIONS.height) / 2;
-      setMaxOffsetX(maxOffsetX);
-      setMinOffsetX(-maxOffsetX);
-      setMaxOffsetY(maxOffsetY);
-      setMinOffsetY(-maxOffsetY);
+    const aspectRatio = imageElement.width / imageElement.height;
+    let width, height;
+    if (aspectRatio < 1) {
+      width = CANVAS_DIMENSIONS.width;
+      height = CANVAS_DIMENSIONS.width / aspectRatio;
+    } else {
+      width = CANVAS_DIMENSIONS.height * aspectRatio;
+      height = CANVAS_DIMENSIONS.height;
+    }
+    const x = (CANVAS_DIMENSIONS.width - width) / 2 + offsetX;
+    const y = (CANVAS_DIMENSIONS.height - height) / 2 + offsetY;
 
-      setImage({
-        data: image?.data,
-        x,
-        y,
-        width,
-        height,
-      });
+    // Ensure image covers the canvas
+    const maxOffsetX = (width - CANVAS_DIMENSIONS.width) / 2;
+    const maxOffsetY = (height - CANVAS_DIMENSIONS.height) / 2;
+    setMaxOffsetX(maxOffsetX);
+    setMinOffsetX(-maxOffsetX);
+    setMaxOffsetY(maxOffsetY);
+    setMinOffsetY(-maxOffsetY);
 
-      setDisableXOffset(width <= CANVAS_DIMENSIONS.width);
-      setDisableYOffset(height <= CANVAS_DIMENSIONS.height);
+    setImage({
+      data: image?.data,
+      x,
+      y,
+      width,
+      height,
+    });
 
-      setImageElement(img);
-    };
-    img.src = image?.data as string;
+    setDisableXOffset(width <= CANVAS_DIMENSIONS.width);
+    setDisableYOffset(height <= CANVAS_DIMENSIONS.height);
   };
 
   const handleOffsetXChange = (e: React.ChangeEvent<HTMLInputElement>) => {

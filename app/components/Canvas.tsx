@@ -36,7 +36,7 @@ const Canvas = ({
       ref={canvasRef}
       width={canvasWidth}
       height={canvasHeight}
-      style={{ border: "1px solid red" }}
+      style={{ backgroundColor: "#ccc" }}
       {...rest}
     />
   );
