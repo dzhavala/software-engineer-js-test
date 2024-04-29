@@ -1,7 +1,8 @@
 import React, { useState, useEffect, MouseEvent } from "react";
-import Canvas from "../Canvas";
 import { CANVAS_DIMENSIONS } from "../../constants";
 import { type ImageDetails } from "../../types";
+import Canvas from "../Canvas";
+import Toolbar from "../Toolbar";
 
 const PhotoEditor: React.FC = () => {
   const [image, setImage] = useState<ImageDetails | null>(null);
@@ -136,33 +137,19 @@ const PhotoEditor: React.FC = () => {
 
   return (
     <div>
-      <input type="file" accept="image/*" onChange={handleImageUpload} />
-      <div>
-        <label htmlFor="offsetX">Horizontal Offset:</label>
-        <input
-          type="range"
-          id="offsetX"
-          name="offsetX"
-          min={minOffsetX}
-          max={maxOffsetX}
-          value={offsetX}
-          onChange={handleOffsetXChange}
-          disabled={disableXOffset}
-        />
-      </div>
-      <div>
-        <label htmlFor="offsetY">Vertical Offset:</label>
-        <input
-          type="range"
-          id="offsetY"
-          name="offsetY"
-          min={minOffsetY}
-          max={maxOffsetY}
-          value={offsetY}
-          onChange={handleOffsetYChange}
-          disabled={disableYOffset}
-        />
-      </div>
+      <Toolbar
+        minOffsetX={minOffsetX}
+        maxOffsetX={maxOffsetX}
+        offsetX={offsetX}
+        handleOffsetXChange={handleOffsetXChange}
+        disableXOffset={disableXOffset}
+        minOffsetY={minOffsetY}
+        maxOffsetY={maxOffsetY}
+        offsetY={offsetY}
+        handleOffsetYChange={handleOffsetYChange}
+        disableYOffset={disableYOffset}
+        handleImageUpload={handleImageUpload}
+      />
 
       <Canvas
         canvasWidth={CANVAS_DIMENSIONS.width}

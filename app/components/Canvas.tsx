@@ -32,17 +32,13 @@ const Canvas = ({
   }
 
   return (
-    <>
-      <h2>Canvas</h2>
-      <canvas
-        ref={canvasRef}
-        id="canvas"
-        width={canvasWidth}
-        height={canvasHeight}
-        style={{ border: "1px solid red" }}
-        {...rest}
-      />
-    </>
+    <canvas
+      ref={canvasRef}
+      width={canvasWidth}
+      height={canvasHeight}
+      style={{ border: "1px solid red" }}
+      {...rest}
+    />
   );
 };
 
