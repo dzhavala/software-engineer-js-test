@@ -1,16 +1,11 @@
 import React, { useRef } from "react";
-
-import { type ImageDetails } from "../types";
-import { usePhotoEditor } from "../context";
+import { usePhotoEditor } from "../context/PhotoEditorContext";
+import useImageOffsetDrag from "../hooks/useImageOffsetDrag";
 
 interface CanvasProps {
   imageElement: HTMLImageElement | null | undefined;
   canvasWidth: number;
   canvasHeight: number;
-  onMouseDown: (event: React.MouseEvent<HTMLCanvasElement>) => void;
-  onMouseMove: (event: React.MouseEvent<HTMLCanvasElement>) => void;
-  onMouseUp: (event: React.MouseEvent<HTMLCanvasElement>) => void;
-  onMouseLeave: (event: React.MouseEvent<HTMLCanvasElement>) => void;
 }
 
 const Canvas = ({
@@ -20,8 +15,11 @@ const Canvas = ({
   ...rest
 }: CanvasProps) => {
   const { imageDetails } = usePhotoEditor();
-
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const { handleMouseDown, handleMouseMove, handleMouseUp } =
+    useImageOffsetDrag();
+
   if (canvasRef.current) {
     const ctx = canvasRef.current.getContext("2d");
 
@@ -38,6 +36,10 @@ const Canvas = ({
       width={canvasWidth}
       height={canvasHeight}
       style={{ backgroundColor: "#ccc" }}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
       {...rest}
     />
   );

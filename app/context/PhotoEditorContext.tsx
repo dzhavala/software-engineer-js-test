@@ -6,8 +6,8 @@ import React, {
   Dispatch,
   SetStateAction,
 } from "react";
-import { type ImageDetails } from "./types";
-import { defaultImageDatails } from "./constants";
+import { type ImageDetails } from "../types";
+import { defaultImageDatails } from "../constants";
 // Define types for context value
 type PhotoEditorContextType = {
   imageDetails: ImageDetails;
@@ -41,6 +41,8 @@ export const PhotoEditorProvider = ({
     null
   );
 
+  const { data, x, y, width, height } = imageDetails;
+
   const contextValue = useMemo(
     () => ({
       imageDetails,
@@ -48,7 +50,7 @@ export const PhotoEditorProvider = ({
       imageElement,
       setImageElement,
     }),
-    [imageDetails, setImageDetails, imageElement, setImageElement]
+    [data, x, y, width, height, setImageDetails, imageElement, setImageElement]
   );
 
   return (

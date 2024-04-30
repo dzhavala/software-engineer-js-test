@@ -1,7 +1,7 @@
 import React from "react";
 import uploadImage from "../utils/fileReader";
 import imageCreator from "../utils/imageCreator";
-import { usePhotoEditor } from "../context";
+import { usePhotoEditor } from "../context/PhotoEditorContext";
 
 const FileUploadButton = () => {
   const { setImageElement } = usePhotoEditor();
