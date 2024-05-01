@@ -3,7 +3,7 @@ import { PhotoEditorProvider } from "./context/PhotoEditorContext";
 import { ImageOffsetManagementProvider } from "./context/ImageOffsetManagementContext";
 import { PhotoEditor } from "./components/PhotoEditor";
 
-export default function () {
+export default function App() {
   return (
     <PhotoEditorProvider>
       <ImageOffsetManagementProvider>

@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { usePhotoEditor } from "../context/PhotoEditorContext";
 import { CANVAS_DIMENSIONS } from "../constants";
 import { useImageOffsetManagement } from "../context/ImageOffsetManagementContext";
-import imageDetailsCreator from "../utils/imageDetailsCreator";
 
 const useImageDetailsSetup = () => {
   const { setImageDetails, imageDetails, imageElement } = usePhotoEditor();

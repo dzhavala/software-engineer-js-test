@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import { usePhotoEditor } from "../context/PhotoEditorContext";
-import { useImageOffsetManagement } from "../context/ImageOffsetManagementContext";
 import imageCreator from "../utils/imageCreator";
 import imageDetailsCreator from "../utils/imageDetailsCreator";
 import { convertImageDetailsToPixels } from "../utils/exportDetailsGenerator";
@@ -9,8 +8,6 @@ import { type ImageDetails, type ExportDetails } from "../types";
 const LoadImageDetailsButton: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { setImageElement, setImageDetails } = usePhotoEditor();
-  const { offsetX, setOffsetX, offsetY, setOffsetY } =
-    useImageOffsetManagement();
 
   const handleButtonClick = () => {
     if (fileInputRef.current) {

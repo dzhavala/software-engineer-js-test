@@ -1,7 +1,4 @@
-import {
-  PIXELS_TO_INCHES_RATIO,
-  CANVAS_DIMENSIONS_IN_INCHES,
-} from "../constants";
+import { CANVAS_DIMENSIONS_IN_INCHES } from "../constants";
 import { type ImageDetails, type ExportDetails } from "../types";
 import {
   convertPixelsToInches,

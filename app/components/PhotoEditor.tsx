@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { CANVAS_DIMENSIONS } from "../constants";
 import Canvas from "./Canvas";
 import Toolbar from "./Toolbar";
