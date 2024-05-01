@@ -36,7 +36,7 @@ const LoadImageDetailsButton: React.FC = () => {
       }
       let imageElement = null;
       try {
-        imageElement = await imageCreator(imageData.data);
+        imageElement = await imageCreator(imageData.src);
       } catch (error) {
         alert(`Error generating img element: , ${(error as Error).message}`);
       }

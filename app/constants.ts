@@ -9,5 +9,5 @@ export const defaultImageDatails: ImageDetails = {
   height: 0,
   x: 0,
   y: 0,
-  data: "",
+  src: "",
 };

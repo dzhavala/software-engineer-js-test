@@ -26,7 +26,7 @@ export default function imageDetailsCreator(
   }
 
   return {
-    data: imageElement.src,
+    src: imageElement.src,
     x: offsetX ?? x,
     y: offsetY ?? y,
     width,

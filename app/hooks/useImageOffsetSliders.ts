@@ -19,7 +19,7 @@ const useImageOffsetSliders = () => {
       setDisableXOffset(imageDetails.width <= CANVAS_DIMENSIONS.width);
       setDisableYOffset(imageDetails.height <= CANVAS_DIMENSIONS.height);
     }
-  }, [imageDetails.data]);
+  }, [imageDetails.src]);
 
   const handleOffsetXChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOffsetX({

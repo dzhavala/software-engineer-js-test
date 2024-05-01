@@ -6,8 +6,8 @@ const SaveImageDetailsButton: React.FC = () => {
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
   useEffect(() => {
-    setIsDisabled(!imageDetails.data);
-  }, [imageDetails.data]);
+    setIsDisabled(!imageDetails.src);
+  }, [imageDetails.src]);
 
   const handleClick = () => {
     if (!imageDetails) {
