@@ -5,31 +5,34 @@ import { useImageOffsetManagement } from "../context/ImageOffsetManagementContex
 import imageDetailsCreator from "../utils/imageDetailsCreator";
 
 const useImageDetailsSetup = () => {
-  const { setImageDetails, imageElement } = usePhotoEditor();
+  const { setImageDetails, imageDetails, imageElement } = usePhotoEditor();
 
   const { offsetX, setOffsetX, offsetY, setOffsetY } =
     useImageOffsetManagement();
 
-  useEffect(() => {
-    const imageDetails = imageDetailsCreator(imageElement);
-    setImageDetails(imageDetails);
-
+  const resetImageOffset = () => {
     // Ensure image covers the canvas
     const maxOffsetXVal = (imageDetails.width - CANVAS_DIMENSIONS.width) / 2;
     const maxOffsetYVal = (imageDetails.height - CANVAS_DIMENSIONS.height) / 2;
 
-    // Setup initial position/offset values
+    // Setup offset position and boundary values after loading the image
     setOffsetX({
-      current: 0,
-      min: -maxOffsetXVal,
-      max: maxOffsetXVal,
+      current: imageDetails.x,
+      min: -maxOffsetXVal * 2,
+      max: 0,
     });
 
     setOffsetY({
-      current: 0,
-      min: -maxOffsetYVal,
-      max: maxOffsetYVal,
+      current: imageDetails.y,
+      min: -maxOffsetYVal * 2,
+      max: 0,
     });
+  };
+
+  useEffect(() => {
+    if (imageElement) {
+      resetImageOffset();
+    }
   }, [imageElement]);
 
   // Once image position/offset is changed regenerate the imageDetails object taking into account new offset
@@ -37,14 +40,11 @@ const useImageDetailsSetup = () => {
     setImageDetails(
       imageDetailsCreator(imageElement, offsetX.current, offsetY.current)
     );
-  }, [
-    offsetX.min,
-    offsetX.max,
-    offsetX.current,
-    offsetY.min,
-    offsetY.max,
-    offsetY.current,
-  ]);
+  }, [offsetX.current, offsetY.current]);
+
+  return {
+    resetImageOffset,
+  };
 };
 
 export default useImageDetailsSetup;

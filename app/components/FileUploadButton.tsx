@@ -2,9 +2,11 @@ import React from "react";
 import uploadImage from "../utils/fileReader";
 import imageCreator from "../utils/imageCreator";
 import { usePhotoEditor } from "../context/PhotoEditorContext";
+import imageDetailsCreator from "../utils/imageDetailsCreator";
 
 const FileUploadButton = () => {
-  const { setImageElement } = usePhotoEditor();
+  const { setImageElement, setImageDetails } = usePhotoEditor();
+
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
 
@@ -28,6 +30,7 @@ const FileUploadButton = () => {
     }
 
     setImageElement(imageElement);
+    setImageDetails(imageDetailsCreator(imageElement));
   };
 
   return <input type="file" accept="image/*" onChange={handleImageUpload} />;

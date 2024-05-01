@@ -1,12 +1,14 @@
 import React from "react";
 import FileUploadButton from "./FileUploadButton";
 import ImagePositionControls from "./ImagePositionControls";
-
+import DataExportImportComponent from "./DataExportImportComponent";
 const Toolbar = () => {
   return (
     <>
       <FileUploadButton />
       <ImagePositionControls />
+      <br />
+      <DataExportImportComponent />
       <div>
         <small>
           You may use your mouse to position the image inside canvas
