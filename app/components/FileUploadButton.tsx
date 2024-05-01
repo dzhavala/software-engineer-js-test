@@ -1,8 +1,6 @@
 import React, { useRef } from "react";
-import uploadImage from "../utils/fileReader";
-import imageCreator from "../utils/imageCreator";
 import { usePhotoEditor } from "../context/PhotoEditorContext";
-import imageDetailsCreator from "../utils/imageDetailsCreator";
+import { uploadNewImage } from "../utils/dataImportExportManager";
 
 const FileUploadButton = () => {
   const { setImageElement, setImageDetails } = usePhotoEditor();
@@ -22,22 +20,11 @@ const FileUploadButton = () => {
       return;
     }
 
-    let imageDataUrl = "";
-    let imageElement = null;
-    try {
-      imageDataUrl = await uploadImage(file);
-    } catch (error) {
-      alert(`Error uploading image: , ${(error as Error).message}`);
-    }
-
-    try {
-      imageElement = await imageCreator(imageDataUrl);
-    } catch (error) {
-      alert(`Error generating img element: , ${(error as Error).message}`);
-    }
+    const { imageElement, imageDetails } = await uploadNewImage(file);
 
     setImageElement(imageElement);
-    setImageDetails(imageDetailsCreator({ imageElement }));
+    setImageDetails(imageDetails);
+
     e.target.value = "";
   };
 
