@@ -5,6 +5,7 @@ export const CANVAS_DIMENSIONS: CanvasDimensions = {
 };
 
 export const defaultImageDatails: ImageDetails = {
+  id: "",
   width: 0,
   height: 0,
   x: 0,

@@ -4,6 +4,7 @@ export type CanvasDimensions = {
 };
 
 export type ImageDetails = {
+  id: string;
   src: string | null | undefined;
   x: number;
   y: number;

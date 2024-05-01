@@ -31,6 +31,7 @@ const LoadImageDetailsButton: React.FC = () => {
       let imageData;
       try {
         imageData = JSON.parse(result);
+        // TODO: add JSON parsing by zod
       } catch (error) {
         console.error("Error parsing JSON:", error);
       }
@@ -40,11 +41,9 @@ const LoadImageDetailsButton: React.FC = () => {
       } catch (error) {
         alert(`Error generating img element: , ${(error as Error).message}`);
       }
-
+      const { x, y, id } = imageData;
       setImageElement(imageElement);
-      setImageDetails(
-        imageDetailsCreator(imageElement, imageData.x, imageData.y)
-      );
+      setImageDetails(imageDetailsCreator({ imageElement, x, y, id }));
     };
 
     reader.readAsText(file);

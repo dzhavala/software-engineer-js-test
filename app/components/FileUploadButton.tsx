@@ -37,7 +37,7 @@ const FileUploadButton = () => {
     }
 
     setImageElement(imageElement);
-    setImageDetails(imageDetailsCreator(imageElement));
+    setImageDetails(imageDetailsCreator({ imageElement }));
     e.target.value = "";
   };
 

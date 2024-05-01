@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { usePhotoEditor } from "../context/PhotoEditorContext";
+import { generateId } from "../utils/imageIdGenerator";
 
 const SaveImageDetailsButton: React.FC = () => {
   const { imageDetails } = usePhotoEditor();
@@ -19,13 +20,11 @@ const SaveImageDetailsButton: React.FC = () => {
     const blob = new Blob([jsonString], { type: "application/json" });
     const url = URL.createObjectURL(blob);
 
-    let fileName = `image_details_${new Date()
-      .toISOString()
-      .replace(/[-:.]/g, "")}`;
+    let fileName = generateId();
 
     // Prompt user for custom file name
     const customFileName = window.prompt(
-      "Enter a custom file name instr (optional):",
+      "Enter a custom file name (optional):",
       fileName
     );
 

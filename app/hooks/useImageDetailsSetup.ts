@@ -37,9 +37,13 @@ const useImageDetailsSetup = () => {
 
   // Once image position/offset is changed regenerate the imageDetails object taking into account new offset
   useEffect(() => {
-    setImageDetails(
-      imageDetailsCreator(imageElement, offsetX.current, offsetY.current)
-    );
+    setImageDetails({
+      ...imageDetails,
+      ...{
+        x: offsetX.current,
+        y: offsetY.current,
+      },
+    });
   }, [offsetX.current, offsetY.current]);
 
   return {
