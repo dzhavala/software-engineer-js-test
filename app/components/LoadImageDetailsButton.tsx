@@ -53,6 +53,7 @@ const LoadImageDetailsButton: React.FC = () => {
       }
       const { x, y, id } = convertImageDetailsToPixels(imageData);
 
+      // TODO: handle imported canvas size
       setImageElement(imageElement);
       setImageDetails(imageDetailsCreator({ imageElement, x, y, id }));
     };
