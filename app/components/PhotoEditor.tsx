@@ -1,7 +1,7 @@
 import React from "react";
 import { CANVAS_DIMENSIONS } from "../constants";
 import Canvas from "./Canvas";
-import Toolbar from "./Toolbar";
+import Toolbar from "./ToolbarControls/Toolbar";
 import { usePhotoEditor } from "../context/PhotoEditorContext";
 import useImageDetailsSetup from "../hooks/useImageDetailsSetup";
 

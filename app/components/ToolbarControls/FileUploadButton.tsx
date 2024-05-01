@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
-import { usePhotoEditor } from "../context/PhotoEditorContext";
-import { uploadNewImage } from "../utils/dataImportExportManager";
+import { usePhotoEditor } from "../../context/PhotoEditorContext";
+import { uploadNewImage } from "../../utils/dataImportExportManager";
 
 const FileUploadButton = () => {
   const { setImageElement, setImageDetails } = usePhotoEditor();

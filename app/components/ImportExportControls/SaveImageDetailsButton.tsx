@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { usePhotoEditor } from "../context/PhotoEditorContext";
-import { saveData } from "../utils/dataImportExportManager";
+import { usePhotoEditor } from "../../context/PhotoEditorContext";
+import { saveData } from "../../utils/dataImportExportManager";
 
 const SaveImageDetailsButton: React.FC = () => {
   const { imageDetails } = usePhotoEditor();

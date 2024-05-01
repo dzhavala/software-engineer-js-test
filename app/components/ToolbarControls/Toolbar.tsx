@@ -1,7 +1,7 @@
 import React from "react";
 import FileUploadButton from "./FileUploadButton";
 import ImagePositionControls from "./ImagePositionControls";
-import DataExportImportComponent from "./DataExportImportComponent";
+import DataExportImportComponent from "../ImportExportControls/DataExportImportComponent";
 const Toolbar = () => {
   return (
     <>

@@ -1,6 +1,6 @@
 import React from "react";
-import { useImageOffsetManagement } from "../context/ImageOffsetManagementContext";
-import useImageOffsetSliders from "../hooks/useImageOffsetSliders";
+import { useImageOffsetManagement } from "../../context/ImageOffsetManagementContext";
+import useImageOffsetSliders from "../../hooks/useImageOffsetSliders";
 
 const ImagePositionControls = () => {
   const { offsetX, offsetY } = useImageOffsetManagement();
