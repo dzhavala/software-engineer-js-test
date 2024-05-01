@@ -42,7 +42,7 @@ const FileUploadButton = () => {
   };
 
   return (
-    <label htmlFor="file-uploader" style={{ display: "inline-block" }}>
+    <div>
       <input
         ref={hiddenFileInput}
         style={{ display: "none" }}
@@ -54,7 +54,7 @@ const FileUploadButton = () => {
       <button type="button" onClick={handleClick}>
         Load New Image
       </button>
-    </label>
+    </div>
   );
 };
 

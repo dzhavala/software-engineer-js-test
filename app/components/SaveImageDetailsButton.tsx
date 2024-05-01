@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { usePhotoEditor } from "../context/PhotoEditorContext";
 import { generateId } from "../utils/imageIdGenerator";
+import { exportDetails } from "../utils/exportDetailsGenerator";
 
 const SaveImageDetailsButton: React.FC = () => {
   const { imageDetails } = usePhotoEditor();
@@ -16,7 +17,9 @@ const SaveImageDetailsButton: React.FC = () => {
       return;
     }
 
-    const jsonString = JSON.stringify(imageDetails, null, 2);
+    const exportData = exportDetails(imageDetails);
+
+    const jsonString = JSON.stringify(exportData, null, 2);
     const blob = new Blob([jsonString], { type: "application/json" });
     const url = URL.createObjectURL(blob);
 

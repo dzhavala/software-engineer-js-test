@@ -41,7 +41,7 @@ export const PhotoEditorProvider = ({
     null
   );
 
-  const { src, x, y, width, height } = imageDetails;
+  const { src, id, x, y, width, height } = imageDetails;
 
   const contextValue = useMemo(
     () => ({
@@ -50,7 +50,17 @@ export const PhotoEditorProvider = ({
       imageElement,
       setImageElement,
     }),
-    [src, x, y, width, height, setImageDetails, imageElement, setImageElement]
+    [
+      src,
+      id,
+      x,
+      y,
+      width,
+      height,
+      setImageDetails,
+      imageElement,
+      setImageElement,
+    ]
   );
 
   return (

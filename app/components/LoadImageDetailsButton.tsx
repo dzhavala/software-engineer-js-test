@@ -3,6 +3,8 @@ import { usePhotoEditor } from "../context/PhotoEditorContext";
 import { useImageOffsetManagement } from "../context/ImageOffsetManagementContext";
 import imageCreator from "../utils/imageCreator";
 import imageDetailsCreator from "../utils/imageDetailsCreator";
+import { convertImageDetailsToPixels } from "../utils/exportDetailsGenerator";
+import { type ImageDetails, type ExportDetails } from "../types";
 
 const LoadImageDetailsButton: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -28,25 +30,35 @@ const LoadImageDetailsButton: React.FC = () => {
     const reader = new FileReader();
     reader.onload = async () => {
       const result = reader.result as string;
-      let imageData;
+      let importedData: ExportDetails;
+      let imageData: ImageDetails;
       try {
-        imageData = JSON.parse(result);
+        importedData = JSON.parse(result);
+        imageData = importedData.canvas.photo;
+        if (!imageData) {
+          throw new Error("Error parsing JSON: no image data is found");
+        }
         // TODO: add JSON parsing by zod
       } catch (error) {
         console.error("Error parsing JSON:", error);
+        return;
       }
       let imageElement = null;
       try {
-        imageElement = await imageCreator(imageData.src);
+        if (imageData.src) {
+          imageElement = await imageCreator(imageData.src);
+        }
       } catch (error) {
         alert(`Error generating img element: , ${(error as Error).message}`);
       }
-      const { x, y, id } = imageData;
+      const { x, y, id } = convertImageDetailsToPixels(imageData);
+
       setImageElement(imageElement);
       setImageDetails(imageDetailsCreator({ imageElement, x, y, id }));
     };
 
     reader.readAsText(file);
+    event.target.value = "";
   };
 
   return (

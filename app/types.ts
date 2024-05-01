@@ -12,6 +12,14 @@ export type ImageDetails = {
   height: number;
 };
 
+export type ExportDetails = {
+  canvas: {
+    width: number;
+    height: number;
+    photo: ImageDetails;
+  };
+};
+
 export type ImageOffsetItem = {
   min: number;
   max: number;
