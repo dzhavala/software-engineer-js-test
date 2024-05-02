@@ -43,16 +43,17 @@ export function loadData(file: File): Promise<{
       const result = reader.result as string;
       let importedData: ExportDetails;
       let imageData: ImageDetails;
+      let error;
       try {
         importedData = JSON.parse(result);
         imageData = importedData.canvas.photo;
         if (!imageData) {
-          throw new Error("Error parsing JSON: no image data is found");
+          error = new Error("Error parsing JSON: no image data is found");
+          throw error;
         }
         // TODO: add JSON parsing by zod
       } catch (error) {
-        console.error("Error parsing JSON:", error);
-        reject();
+        reject(error);
         return;
       }
       let imageElement = null;
@@ -60,12 +61,12 @@ export function loadData(file: File): Promise<{
         if (imageData.src) {
           imageElement = await imageCreator(imageData.src);
         } else {
-          reject();
+          reject("No image src is provided");
           return;
         }
       } catch (error) {
         alert(`Error generating img element: , ${(error as Error).message}`);
-        reject();
+        reject(error);
         return;
       }
       const { x, y, id } = convertImageDetailsToPixels(imageData);
@@ -92,7 +93,7 @@ export function uploadNewImage(file: File): Promise<{
         imageDataSrc = await uploadImage(file);
       } catch (error) {
         alert(`Error uploading image: , ${(error as Error).message}`);
-        reject();
+        reject(error);
         return;
       }
 
@@ -100,7 +101,7 @@ export function uploadNewImage(file: File): Promise<{
         imageElement = await imageCreator(imageDataSrc);
       } catch (error) {
         alert(`Error generating img element: , ${(error as Error).message}`);
-        reject();
+        reject(error);
         return;
       }
 

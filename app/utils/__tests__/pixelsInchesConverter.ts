@@ -10,7 +10,7 @@ describe("Utility Functions", () => {
       const pixels = 100;
       const expectedInches = pixels / PIXELS_TO_INCHES_RATIO;
       const result = convertPixelsToInches(pixels);
-      expect(result).not.toBe(expectedInches);
+      expect(result).toBe(expectedInches);
     });
 
     it("should return 0 when provided 0 pixels", () => {

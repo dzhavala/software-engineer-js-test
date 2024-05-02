@@ -8,7 +8,7 @@
     "prepare": "husky",
     "prettier": "prettier --write . --ignore-unknown",
     "lint": "eslint app",
-    "test": "jest"
+    "test": "jest --env=jsdom"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.8.2",
@@ -39,10 +39,12 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-react": "^7.34.1",
+    "jest-environment-jsdom": "^29.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "jest": {
-    "preset": "ts-jest"
+    "preset": "ts-jest",
+    "testEnvironment": "jsdom"
   }
 }
