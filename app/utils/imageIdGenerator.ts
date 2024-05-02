@@ -1,3 +1,7 @@
 export function generateId() {
-  return `image_details_${new Date().toISOString().replace(/[-:.]/g, "")}`;
+  const timestamp =
+    new Date().toISOString().replace(/[-:.]/g, "") +
+    Math.floor(Math.random() * 100);
+
+  return `image_details_${timestamp}`;
 }
