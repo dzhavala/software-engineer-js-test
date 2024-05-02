@@ -5,6 +5,7 @@ import { convertImageDetailsToPixels } from "../utils";
 import imageCreator from "../utils/imageCreator";
 import imageDetailsCreator from "../utils/imageDetailsCreator";
 import uploadImage from "../utils/fileReader";
+import { CANVAS_DIMENSIONS_IN_INCHES } from "../constants";
 
 export function saveData(imageDetails: ImageDetails) {
   const exportData = exportDetails(imageDetails);
@@ -49,6 +50,15 @@ export function loadData(file: File): Promise<{
         imageData = importedData.canvas.photo;
         if (!imageData) {
           error = new Error("Error parsing JSON: no image data is found");
+          throw error;
+        }
+        if (
+          importedData.canvas.width !== CANVAS_DIMENSIONS_IN_INCHES.width ||
+          importedData.canvas.height !== CANVAS_DIMENSIONS_IN_INCHES.height
+        ) {
+          error = new Error(
+            "Error parsing JSON: not correct fixed canvas size is provided for this project"
+          );
           throw error;
         }
         // TODO: add JSON parsing by zod

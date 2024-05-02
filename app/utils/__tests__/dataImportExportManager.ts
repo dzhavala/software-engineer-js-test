@@ -19,14 +19,6 @@ const mockedJson = {
   },
 };
 
-// // Mock URL.createObjectURL and URL.revokeObjectURL
-// const createObjectURLMock = jest.fn();
-// const revokeObjectURLMock = jest.fn();
-
-// // // Setup JSDOM global objects
-// global.URL.createObjectURL = createObjectURLMock;
-// global.URL.revokeObjectURL = revokeObjectURLMock;
-
 // Mock dependencies
 jest.mock("../imageIdGenerator", () => ({
   generateId: jest.fn(() => "mockedId"),
@@ -78,13 +70,27 @@ describe("Utility Functions", () => {
       await expect(loadData(file)).rejects.toThrow();
     });
     it("should throw an error if JSON in the file does not contain image src value", async () => {
-      const corruptedJsonString = '{"canvas":{"photo":{}}}';
+      const corruptedJsonString =
+        '{"canvas":{"width": 15, "height": 10, "photo":{}}}';
 
       const file = new File([corruptedJsonString], "mockedFileName.json", {
         type: "application/json",
       });
 
       await expect(loadData(file)).rejects.toEqual("No image src is provided");
+    });
+    it("should throw an error if JSON in the file does not contain corrext canvas size", async () => {
+      const corruptedJsonString =
+        '{"canvas":{"width": 0, "height": 10,"photo":{}}}';
+
+      const file = new File([corruptedJsonString], "mockedFileName.json", {
+        type: "application/json",
+      });
+      await expect(loadData(file)).rejects.toEqual(
+        new Error(
+          "Error parsing JSON: not correct fixed canvas size is provided for this project"
+        )
+      );
     });
   });
   describe("uploadNewImage", () => {
