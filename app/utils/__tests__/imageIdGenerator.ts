@@ -1,4 +1,4 @@
-import { generateId } from "../imageIdGenerator"; // Replace "./exampleFile" with the path to your file
+import { generateId } from "../"; // Replace "./exampleFile" with the path to your file
 
 describe("generateId", () => {
   it("should generate an ID with a mocked date", () => {

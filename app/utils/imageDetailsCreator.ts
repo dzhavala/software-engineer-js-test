@@ -1,6 +1,6 @@
 import { type ImageDetails } from "../types";
 import { CANVAS_DIMENSIONS, defaultImageDatails } from "../constants";
-import { generateId } from "../utils/imageIdGenerator";
+import { generateId } from "./";
 
 type imageDetailsCreatorProps = {
   imageElement: HTMLImageElement | null;

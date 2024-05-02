@@ -1,8 +1,8 @@
-import { loadData, uploadNewImage } from "../dataImportExportManager";
-import { convertImageDetailsToPixels } from "../../utils/exportDetailsGenerator";
-import imageDetailsCreator from "../../utils/imageDetailsCreator";
-import uploadImage from "../../utils/fileReader";
-import imageCreator from "../../utils/imageCreator";
+import { loadData, uploadNewImage } from "../";
+import { convertImageDetailsToPixels } from "../exportDetailsGenerator";
+import imageDetailsCreator from "../imageDetailsCreator";
+import uploadImage from "../fileReader";
+import imageCreator from "../imageCreator";
 
 const mockedJson = {
   canvas: {

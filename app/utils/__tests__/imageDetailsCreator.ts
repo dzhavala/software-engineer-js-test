@@ -40,7 +40,7 @@ describe("imageDetailsCreator", () => {
     expect(result.y).toBe(0);
   });
 
-  it.only("should calculate dimensions and positions correctly for portrait aspect ratio", () => {
+  it("should calculate dimensions and positions correctly for portrait aspect ratio", () => {
     // Mock image element with portrait aspect ratio (height > width)
     mockImageElement.width = 100;
     mockImageElement.height = 200;

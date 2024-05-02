@@ -1,7 +1,4 @@
-import {
-  convertPixelsToInches,
-  convertInchesToPixels,
-} from "../pixelsInchesConverter";
+import { convertPixelsToInches, convertInchesToPixels } from "../";
 import { PIXELS_TO_INCHES_RATIO } from "../../constants";
 
 describe("Utility Functions", () => {

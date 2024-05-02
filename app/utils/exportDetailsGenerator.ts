@@ -1,9 +1,6 @@
 import { CANVAS_DIMENSIONS_IN_INCHES } from "../constants";
 import { type ImageDetails, type ExportDetails } from "../types";
-import {
-  convertPixelsToInches,
-  convertInchesToPixels,
-} from "../utils/pixelsInchesConverter";
+import { convertPixelsToInches, convertInchesToPixels } from "./";
 
 export function convertImageDetailsToInches(imageDetails: ImageDetails) {
   const { x, y, width, height } = imageDetails;

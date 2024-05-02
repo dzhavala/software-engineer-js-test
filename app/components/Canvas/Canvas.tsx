@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { usePhotoEditor } from "../../context/PhotoEditorContext";
+import { usePhotoEditor } from "../../context";
 import useImageOffsetDrag from "../../hooks/useImageOffsetDrag";
 import styles from "./Canvas.module.scss";
 

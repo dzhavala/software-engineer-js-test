@@ -2,7 +2,7 @@ import React from "react";
 import { CANVAS_DIMENSIONS } from "../constants";
 import Canvas from "./Canvas/Canvas";
 import Toolbar from "./ToolbarControls/Toolbar";
-import { usePhotoEditor } from "../context/PhotoEditorContext";
+import { usePhotoEditor } from "../context";
 import useImageDetailsSetup from "../hooks/useImageDetailsSetup";
 
 const PhotoEditor: React.FC = () => {

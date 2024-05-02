@@ -2,7 +2,7 @@ import {
   convertImageDetailsToInches,
   convertImageDetailsToPixels,
   exportDetails,
-} from "../exportDetailsGenerator"; // Replace "./exampleFile" with the path to your file
+} from "../"; // Replace "./exampleFile" with the path to your file
 import { type ImageDetails } from "../../types";
 import { CANVAS_DIMENSIONS_IN_INCHES } from "../../constants";
 

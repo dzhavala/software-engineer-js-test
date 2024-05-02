@@ -1,7 +1,7 @@
 import { type ExportDetails, type ImageDetails } from "../types";
-import { generateId } from "../utils/imageIdGenerator";
-import { exportDetails } from "../utils/exportDetailsGenerator";
-import { convertImageDetailsToPixels } from "../utils/exportDetailsGenerator";
+import { generateId } from "../utils";
+import { exportDetails } from "../utils";
+import { convertImageDetailsToPixels } from "../utils";
 import imageCreator from "../utils/imageCreator";
 import imageDetailsCreator from "../utils/imageDetailsCreator";
 import uploadImage from "../utils/fileReader";

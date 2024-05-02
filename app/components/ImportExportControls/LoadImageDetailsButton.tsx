@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
-import { usePhotoEditor } from "../../context/PhotoEditorContext";
-import { loadData } from "../../utils/dataImportExportManager";
+import { usePhotoEditor } from "../../context";
+import { loadData } from "../../utils";
 
 const LoadImageDetailsButton: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
