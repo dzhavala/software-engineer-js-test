@@ -21,7 +21,7 @@ const SaveImageDetailsButton: React.FC = () => {
 
   return (
     <button onClick={handleClick} disabled={isDisabled}>
-      Save Image Details
+      Save Project
     </button>
   );
 };

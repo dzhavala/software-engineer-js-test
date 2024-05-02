@@ -8,10 +8,12 @@
     "prepare": "husky",
     "prettier": "prettier --write . --ignore-unknown",
     "lint": "eslint app",
+    "lint:styles": "stylelint '**/*.scss' --fix",
     "test": "jest --env=jsdom"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.8.2",
+    "@testing-library/react-hooks": "^8.0.1",
     "@types/jest": "^29.2.4",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
@@ -21,12 +23,14 @@
     "parcel": "^2.8.2",
     "prettier": "3.2.5",
     "process": "^0.11.10",
+    "stylelint-config-standard": "^36.0.0",
     "ts-jest": "^29.0.3",
     "typescript": "^4.9.4"
   },
   "lint-staged": {
     "*.{ts,tsx,ts,js}": "yarn lint",
-    "*.{js,jsx,ts,tsx,html,css}": "yarn prettier"
+    "*.scss": "yarn lint:styles",
+    "*.{js,jsx,ts,tsx,html,css, scss}": "yarn prettier"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^7.8.0",
@@ -41,7 +45,9 @@
     "eslint-plugin-react": "^7.34.1",
     "jest-environment-jsdom": "^29.7.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "stylelint": "^16.5.0",
+    "stylelint-scss": "^6.2.1"
   },
   "jest": {
     "preset": "ts-jest",

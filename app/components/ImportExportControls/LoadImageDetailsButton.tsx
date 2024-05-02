@@ -38,7 +38,7 @@ const LoadImageDetailsButton: React.FC = () => {
         style={{ display: "none" }}
         ref={fileInputRef}
       />
-      <button onClick={handleButtonClick}>Load Image Details</button>
+      <button onClick={handleButtonClick}>Load Project</button>
     </div>
   );
 };

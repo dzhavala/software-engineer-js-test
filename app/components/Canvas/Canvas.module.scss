@@ -1,0 +1,13 @@
+.canvas {
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &.empty {
+    cursor: default;
+    background: rgb(255 255 255);
+    box-shadow: rgb(0 0 0 / 20%) 1px 1px 5px 1px inset;
+  }
+}

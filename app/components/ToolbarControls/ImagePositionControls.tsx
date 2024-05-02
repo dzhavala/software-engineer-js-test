@@ -13,7 +13,7 @@ const ImagePositionControls = () => {
   } = useImageOffsetSliders();
 
   return (
-    <>
+    <div>
       <div>
         <label htmlFor="offsetX">Horizontal Offset:</label>
         <input
@@ -40,7 +40,7 @@ const ImagePositionControls = () => {
           disabled={disableYOffset}
         />
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,9 +1,59 @@
+/* Variables */
+$buttonBackroundColor: rgb(26 86 219);
+$buttonTextColor: rgb(255 255 255);
+$buttonBackroundColorHover: rgb(30 66 159);
+$buttonTextColorHover: $buttonTextColor;
+$buttonFontSize: 1rem;
+$buttomLineHeight: 1.25rem;
+$buttonPadding: 0.6rem 1.25rem;
+$buttonBorderRadius: 0.5rem;
+
+$buttonBackroundColorDisabled: rgb(205 205 205);
+$buttonTextColorDisabled: rgb(100 100 100);
+
+/* Common styles */
 body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
   font-family: Helvetica, Verdana, sans-serif;
-  line-height: 1.5em;
-  height: 100%;
+  font-size: 1rem;
+  line-height: 1.3em;
 }
 
-canvas {
-  margin: 20px 0;
+.container {
+  width: 750px;
+  margin: 0 auto;
+}
+
+#app {
+  padding: 1rem;
+  margin: -1rem;
+  background: rgb(235 235 235);
+  border-radius: 1rem;
+}
+
+/* Components */
+button {
+  padding: $buttonPadding;
+  font-size: $buttonFontSize;
+  line-height: $buttomLineHeight;
+  color: $buttonTextColor;
+  cursor: pointer;
+  background: $buttonBackroundColor;
+  border: none;
+  border-radius: $buttonBorderRadius;
+
+  &:hover {
+    color: $buttonTextColorHover;
+    background: $buttonBackroundColorHover;
+  }
+
+  &:disabled {
+    color: $buttonTextColorDisabled;
+    cursor: default;
+    background: $buttonBackroundColorDisabled;
+  }
 }

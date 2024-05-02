@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
-import { usePhotoEditor } from "../context/PhotoEditorContext";
-import useImageOffsetDrag from "../hooks/useImageOffsetDrag";
+import { usePhotoEditor } from "../../context/PhotoEditorContext";
+import useImageOffsetDrag from "../../hooks/useImageOffsetDrag";
+import styles from "./Canvas.module.scss";
 
 interface CanvasProps {
   imageElement: HTMLImageElement | null | undefined;
@@ -32,10 +33,10 @@ const Canvas = ({
 
   return (
     <canvas
+      className={`${styles.canvas} ${!imageElement ? styles.empty : ""}`}
       ref={canvasRef}
       width={canvasWidth}
       height={canvasHeight}
-      style={{ backgroundColor: "#ccc" }}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
