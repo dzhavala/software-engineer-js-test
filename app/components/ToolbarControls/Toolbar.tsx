@@ -16,11 +16,11 @@ const Toolbar = () => {
         </div>
       </div>
 
-      <h2>Move image inside canvas</h2>
+      <h2>Change image position inside canvas</h2>
       <div className={styles.positionControls}>
         <div className={styles.note}>
-          You can change image position using controls on a right or drag the
-          image by cursor inside canvas
+          You can change image position using controls on a right or you can
+          drag the image by cursor inside canvas
         </div>
         <ImagePositionControls />
       </div>
