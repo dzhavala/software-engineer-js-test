@@ -24,7 +24,7 @@ const PhotoEditorContext = createContext<PhotoEditorContextType | undefined>(
 export function usePhotoEditor() {
   const context = useContext(PhotoEditorContext);
   if (!context) {
-    throw new Error("useImage must be used within a ImageProvider");
+    throw new Error("usePhotoEditor must be used within a PhotoEditorProvider");
   }
   return context;
 }

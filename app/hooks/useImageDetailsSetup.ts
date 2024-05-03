@@ -4,7 +4,8 @@ import { CANVAS_DIMENSIONS } from "../constants";
 import { useImageOffsetManagement } from "../context/ImageOffsetManagementContext";
 
 const useImageDetailsSetup = () => {
-  const { setImageDetails, imageDetails, imageElement } = usePhotoEditor();
+  const { setImageDetails, imageDetails, imageElement, setImageElement } =
+    usePhotoEditor();
 
   const { offsetX, setOffsetX, offsetY, setOffsetY } =
     useImageOffsetManagement();
@@ -47,6 +48,12 @@ const useImageDetailsSetup = () => {
 
   return {
     resetImageOffset,
+    offsetX,
+    offsetY,
+    setOffsetX,
+    setOffsetY,
+    imageDetails,
+    setImageElement,
   };
 };
 

@@ -26,7 +26,7 @@ export function useImageOffsetManagement() {
   const context = useContext(ImageOffsetManagement);
   if (!context) {
     throw new Error(
-      "useImage must be used within a ImageOffsetManagementProvider"
+      "useImageOffsetManagement must be used within a ImageOffsetManagementProvider"
     );
   }
   return context;
