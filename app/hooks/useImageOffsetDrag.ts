@@ -51,7 +51,16 @@ const useImageOffsetDrag = () => {
     }
   };
 
-  return { canvasRef, handleMouseDown, handleMouseMove, handleMouseUp };
+  return {
+    canvasRef,
+    handleMouseDown,
+    handleMouseMove,
+    handleMouseUp,
+    offsetX,
+    offsetY,
+    setOffsetX,
+    setOffsetY,
+  };
 };
 
 export default useImageOffsetDrag;
