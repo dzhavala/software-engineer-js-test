@@ -31,14 +31,14 @@ test("Offset sliders are set correctly after horizontal image is first time rend
   const offsetXInput = page.locator('input[name="offsetX"]');
 
   const offsetXValue = await offsetXInput?.evaluate((input) =>
-    Math.ceil(input.value)
+    Math.ceil(parseFloat((input as HTMLInputElement).value))
   );
   expect(offsetXValue).toBe(-102);
 
   const offsetYInput = page.locator('input[name="offsetY"]');
 
   const offsetYValue = await offsetYInput?.evaluate((input) =>
-    Math.ceil(input.value)
+    Math.ceil(parseFloat((input as HTMLInputElement).value))
   );
 
   expect(offsetYValue).toBe(0);
@@ -58,14 +58,14 @@ test("Offset sliders are set correctly after vertical image is first time render
 
   const offsetXInput = page.locator('input[name="offsetX"]');
   const offsetXValue = await offsetXInput?.evaluate((input) =>
-    Math.ceil(input.value)
+    Math.ceil(parseFloat((input as HTMLInputElement).value))
   );
   expect(offsetXValue).toBe(0);
   await expect(offsetXInput).toBeDisabled();
 
   const offsetYInput = page.locator('input[name="offsetY"]');
   const offsetYValue = await offsetYInput?.evaluate((input) =>
-    Math.ceil(input.value)
+    Math.ceil(parseFloat((input as HTMLInputElement).value))
   );
 
   expect(offsetYValue).toBe(-180);
