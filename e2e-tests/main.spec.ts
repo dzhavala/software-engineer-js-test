@@ -3,7 +3,7 @@ test("Image upload renders on canvas", async ({ page }) => {
   // Navigate to the page
   await page.goto("/");
 
-  const imagePath = "./tests/assets/epam.png";
+  const imagePath = "./e2e-tests/assets/epam.png";
 
   const fileInput = await page.$('input[type="file"]');
   await fileInput?.setInputFiles(imagePath);
@@ -24,7 +24,7 @@ test("Offset sliders are set correctly after horizontal image is first time rend
   // Navigate to the page
   await page.goto("/");
 
-  const imagePath = "./tests/assets/epam.png";
+  const imagePath = "./e2e-tests/assets/epam.png";
   const fileInput = await page.$('input[type="file"]');
   await fileInput?.setInputFiles(imagePath);
 
@@ -52,7 +52,7 @@ test("Offset sliders are set correctly after vertical image is first time render
   // Navigate to the page
   await page.goto("/");
 
-  const imagePath = "./tests/assets/epam2.webp";
+  const imagePath = "./e2e-tests/assets/epam2.webp";
   const fileInput = await page.$('input[type="file"]');
   await fileInput?.setInputFiles(imagePath);
 
@@ -77,7 +77,7 @@ test("The prompt is shown after clicking on a 'Save Project' button", async ({
   // Navigate to the page
   await page.goto("/");
 
-  const imagePath = "./tests/assets/epam2.webp";
+  const imagePath = "./e2e-tests/assets/epam2.webp";
   const fileInput = await page.$('input[type="file"]');
   await fileInput?.setInputFiles(imagePath);
 

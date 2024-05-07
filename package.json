@@ -9,7 +9,8 @@
     "prettier": "prettier --write . --ignore-unknown",
     "lint": "eslint app",
     "lint:styles": "stylelint '**/*.scss' --fix",
-    "test": "jest --env=jsdom"
+    "test": "jest --env=jsdom",
+    "test:playwright": "playwright test"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.8.2",
@@ -54,6 +55,9 @@
   },
   "jest": {
     "preset": "ts-jest",
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "testPathIgnorePatterns": [
+      "/e2e-tests"
+    ]
   }
 }
